@@ -13,12 +13,14 @@ import java.time.temporal.ChronoUnit;
 import java.util.Optional;
 import java.util.UUID;
 
+import static Helpers.Specifications.hasEqualIds;
+
 
 public class ParkingZoneValidator {
     // Current time with Estonian timezone +3
     public static final Instant currentTimeWithEstonianTimeZone = Instant.now().plus(3, ChronoUnit.HOURS);
     public static ParkingUnit ValidateParkingZone(UUID parkingZoneId, IParkingZoneRepository parkingZoneRepository, ParkingUnitDTO parkingUnitDTO, Integer timeSelected){
-        Optional<ParkingZone> parkingZone = parkingZoneRepository.findById(parkingZoneId);
+        Optional<ParkingZone> parkingZone = parkingZoneRepository.findOne(hasEqualIds(parkingZoneId));
         if(parkingZone.isPresent()){
             ParkingUnit result = new ParkingUnit();
             result.setLicensePlate(parkingUnitDTO.getName());
