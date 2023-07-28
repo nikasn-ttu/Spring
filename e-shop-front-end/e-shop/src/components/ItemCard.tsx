@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, useNavigate } from 'react-router-dom';
-import { IItemCard } from '../Domain/IItemCard';
+import { IItemCard } from '../domain/IItemCard';
 import image_not_found from '../images/test_cat_img.png';
 import ButtonTemplate from './ButtonTemplate';
 

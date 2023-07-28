@@ -13,19 +13,28 @@
 
 }
 
-#root{
+#root {
   margin: 0;
   padding: 0;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 
-html, body {
-  height: 100vh;
-  width: 100%;
+
+
+body {
   margin: 0;
   padding: 0;
   background-color: #f7f7f7;
-  overflow:scroll;
+  overflow: scroll;
+  background: transparent;
+}
+
+.wrapper {
+  flex: 1;
 }
 
 
@@ -95,7 +104,7 @@ code {
 }
 
 .container {
-  margin-top: 80px;
+  padding-top: 20px;
 }
 
 
@@ -219,7 +228,135 @@ code {
   margin-right: 5%;
 }
 
-@media (max-width: 768px) {
+.loginAndLanguageButtonsContainer {
+  display: flex;
+  align-items: center;
+
+  justify-content: space-between;
+
+}
+
+.loginAndRegisterMobile {
+  display: flex;
+  align-items: center;
+
+}
+
+.loginAndRegisterMobile>a {
+  margin: 10px;
+}
+
+.loginButton {
+  margin-left: 5%;
+  width: 130px;
+  height: 40px;
+  background: #fff;
+  border: solid 0.0625rem #000000;
+  color: #000000;
+}
+
+.registerButton {
+  margin-left: 5%;
+  width: 130px;
+  height: 40px;
+  background: #fff;
+  border: solid 0.0625rem #000000;
+  color: #000000;
+
+}
+
+.logoutButton {
+  margin-left: 5%;
+  width: 130px;
+  height: 40px;
+  background: #fff;
+  border: solid 0.0625rem #000000;
+  color: #000000;
+}
+
+.logoutButton:hover {
+  background-color: #000000;
+  color: #fff;
+}
+
+.profileButtonsContainer {
+  display: flex;
+  align-items: center;
+  margin-left: 5%;
+  min-width: 330px;
+  margin-right: 12px;
+  justify-content: flex-end;
+  gap: 30px;
+}
+
+.dropbtnprofile {
+  background-color: rgba(var(--bs-light-rgb), var(--bs-bg-opacity));
+  font-size: 16px;
+
+}
+
+.dropdownprofile {
+  position: relative;
+  display: inline-block;
+  background-color: #258cfb;
+}
+
+.dropdown-content-profile {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  z-index: 1;
+  right: 0;
+}
+
+
+
+.profileUsername {
+  color: #000;
+  font-family: Domine;
+  font-size: 16px;
+  padding-right: calc(var(--sizes-spacing-8));
+}
+
+.dropdown-content-profile a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content-profile a:hover {
+  background-color: #ddd;
+}
+
+.dropdownprofile:hover .dropdown-content-profile {
+  display: block;
+}
+
+.dropdownprofile:hover .dropbtnprofile {
+  padding-bottom: 10px;
+  /* Adjust the margin-top value as needed */
+  border-bottom: 1px solid black;
+}
+
+.profileIcon {
+  margin-right: calc(var(--sizes-spacing-8));
+  width: 35px;
+  height: 35px;
+}
+
+.loginButton:hover {
+  background-color: #000000;
+  color: #fff;
+}
+
+.registerButton:hover {
+  background-color: #000000;
+  color: #fff;
+}
+
+@media (max-width: 991px) {
   .navbar>.container-fluid {
     display: inline-flex !important;
     position: relative;
@@ -228,8 +365,8 @@ code {
 
   .navbar-language {
     position: absolute;
-    right: 0;
-    padding-right: 80px;
+    right: 99px;
+    top: 5px;
   }
 
   .navbar-brand {
@@ -240,6 +377,7 @@ code {
   .navbar-toggler {
     right: 0;
     position: absolute;
+    top: 0;
   }
 
 
@@ -249,36 +387,42 @@ code {
   flex-wrap: nowrap !important;
 }
 
-.item-view-container-img{
+.itemPageContainer {
   display: flex;
-  flex-direction: column;
-  align-content: center;
+  flex-wrap: nowrap;
+  justify-content: space-evenly;
+}
+
+.item-view-container-img {
+  flex-basis: 50%;
+  margin-top: 20px;
   width: 50%;
-  padding-right: var(--sizes-spacing-4);
+
 }
 
-.item-view-container-buttons{
-  top: 10%;
-  position: absolute;
+.item-view-container-img>div {
+  flex-basis: 50%;
   display: flex;
-  flex-direction: column;
-  align-content: center;
-  width: calc(var(--main-width) / 2);
-  padding-right: var(--sizes-spacing-4);
-  left: 50%;
+
 }
 
-.itemViewImg{
+.item-view-container-buttons {
+  flex-basis: 50%;
+  margin-top: 20px;
+}
+
+.itemViewImg {
   width: 100%;
 }
 
-.thumbnail{
+.thumbnail {
   width: 150px;
   height: 150px;
   object-fit: contain;
 }
 
-div.scroll-container{
+
+div.scroll-container {
   overflow: auto;
   white-space: nowrap;
   padding: var(--sizes-spacing-4);
@@ -288,13 +432,13 @@ div.scroll-container img {
   padding: var(--sizes-spacing-4);
 }
 
-.itemViewTitleContainer{
+.itemViewTitleContainer {
   width: 100%;
   word-wrap: break-word;
   text-align: center;
 }
 
-.itemViewTitle{
+.itemViewTitle {
   width: 100%;
 }
 
@@ -305,6 +449,7 @@ div.scroll-container img {
   grid-auto-flow: row;
   column-gap: var(--sizes-spacing-4);
   row-gap: var(--sizes-spacing-4);
+  justify-content: center;
 }
 
 .itemSizeSelectorButtonSelected {
@@ -329,7 +474,7 @@ div.scroll-container img {
   justify-content: center;
   align-items: center;
   width: 100%;
-  
+
 }
 
 
@@ -345,21 +490,34 @@ div.scroll-container img {
   border: 1px solid #000000;
 }
 
-@media (max-width: 768px) {
-  
+.item-view-container-mobile {
+  margin: 100px 40px 50px;
+}
 
-  .item-view-container-mobile{
+@media (max-width: 991px) {
+  .itemSizeSelector {
+    width: calc(((var(--main-width) - 80px) / var(--productSizeSelector-li-items-mobile-row)) - 2.6px);
+  }
+}
+
+@media (max-width: 768px) {
+
+
+  .item-view-container-mobile {
     display: flex;
     flex-direction: column;
+    margin: 100px 40px 50px;
   }
 
   .itemSizeSelector {
     display: inline-grid;
-    width: calc((var(--main-width) / var(--productSizeSelector-li-items-mobile-row)) - 2.6px);
+    /* Duplicate line take the same sizes as 991px*/
+    width: calc(((var(--main-width) - 80px) / var(--productSizeSelector-li-items-mobile-row)) - 2.6px);
     grid-template-columns: repeat(var(--productSizeSelector-li-items-mobile-row), var(--productSizeSelector-width));
     grid-auto-flow: row;
     column-gap: var(--sizes-spacing-4);
     row-gap: var(--sizes-spacing-4);
+    justify-content: flex-start;
   }
 
   .itemSizeSelectorButtonSelected {
@@ -438,16 +596,16 @@ div.scroll-container img {
   padding: var(--accordion-padding-borderless);
 }
 
-.home-page-title h1{
+.home-page-title h1 {
   font-family: Domine;
   font-size: 4rem;
 }
 
-.home-page-content-container{
+.home-page-content-container {
   background-image: url("images/test_cat_img.png");
 
   /* Full height */
-  height: 100%; 
+  height: 100%;
 
   /* Center and scale the image nicely */
   background-position: center;
@@ -476,21 +634,21 @@ div.scroll-container img {
   background-color: rgb(237, 227, 227);
   margin: 2rem;
   transition: transform 0.3s;
-  transition: all .2s ease-in-out; 
+  transition: all .2s ease-in-out;
 }
 
 .category-scroll-container-item:hover {
-  transform: scale(1.2); 
+  transform: scale(1.2);
 }
 
-.category-scroll-container-item img{
+.category-scroll-container-item img {
   margin-top: 2rem;
   width: 8rem;
   height: 6rem;
   object-fit: fill;
 }
 
-.category-scroll-container-item p{
+.category-scroll-container-item p {
   margin-top: var(--sizes-spacing-8);
   font-family: Domine;
   font-size: 1.1rem;
@@ -498,8 +656,284 @@ div.scroll-container img {
   text-align: center;
 }
 
-#root .container{
+#root .container {
   padding: 0;
   max-width: 100%;
   max-height: 100%;
+}
+
+.loginFormContainer {
+  width: 100%;
+  height: 650px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  background-color: #d3d6d852;
+}
+
+.registerFormContainer {
+  width: 100%;
+  height: 1200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  background-color: #d3d6d852;
+}
+
+.loginAndRegisterForm {
+  width: 500px;
+  height: 100%;
+  border: #000 1px solid;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  /* align-content: center; */
+  margin: 8px;
+  background-color: white;
+}
+
+.loginAndRegisterFormHeader {
+  padding-top: 40px;
+  width: 100%;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  font-size: 300%;
+  font-family: Domine;
+}
+
+.loginFormBody {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 50px;
+}
+
+.loginFormBodyInput {
+  width: 80%;
+  max-height: 150px;
+  border: #000 1px solid;
+  padding: var(--sizes-spacing-8);
+  border-radius: 5px;
+  font-size: 135%;
+  font-family: Domine;
+  display: flex;
+  flex-direction: column;
+}
+
+.inputContainer {
+  width: 100%;
+  height: 40px;
+  display: flex;
+  flex-direction: row;
+}
+
+.inputBorder {
+  border: 1px solid black;
+}
+
+.loginFormIcon {
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+}
+
+.loginFormButton {
+  width: 80%;
+  height: 60px;
+  background-color: #000;
+  color: #fff;
+  font-size: 150%;
+  font-family: Domine;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.loginFormButton:hover {
+  width: 80%;
+  height: 60px;
+  background-color: #ffffff;
+  color: #000000;
+  font-size: 150%;
+  font-family: Domine;
+  border: #000 1px solid;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.loginFormField {
+  border: none;
+  width: 90%;
+}
+
+@media (max-width : 520px) {
+  .loginFormField {
+    width: auto;
+    min-width: 100px;
+  }
+}
+
+
+.passwordForm {
+  margin-top: 20px;
+  padding: 15px;
+  display: inline-block;
+  width: 40%;
+  margin-right: 5%;
+  margin-left: 5%;
+  border: 1px solid black;
+  background-color: #fff;
+}
+
+.togglerCustom {
+  position: relative;
+  width: 60px;
+  height: 40px;
+}
+
+.passwordFormBodyInput {
+  width: 100%;
+  max-height: 150px;
+  border: #000 1px solid;
+  padding: var(--sizes-spacing-8);
+  border-radius: 5px;
+  font-size: 135%;
+  font-family: Domine;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16px;
+}
+
+.passwordFormHeaderContainer {
+  text-align: center;
+  position: relative;
+  padding: 8px;
+}
+
+.passwordFormHeaderContent {
+  font-size: 150%;
+  font-family: Domine;
+}
+
+.phoneForm {
+  margin-top: 20px;
+  padding: 15px;
+  display: inline-block;
+  width: 40%;
+  margin-right: 5%;
+  margin-left: 5%;
+  border: 1px solid black;
+  background-color: #fff;
+}
+
+.passwordFormButtonContainer {
+  position: relative;
+  align-items: center;
+  text-align: center;
+}
+
+.passwordFormButton {
+  font-family: Domine;
+  font-size: 130%;
+  width: 50%;
+  margin-top: var(--sizes-spacing-8);
+  margin-bottom: var(--sizes-spacing-8);
+  background-color: #000000;
+  border: 1px solid #000000;
+  color: #ffffff;
+}
+
+.passwordFormButton:hover {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+@media (max-width: 992px) {
+  .passwordForm {
+    margin-top: 50px;
+  }
+}
+
+@media (max-width: 876px) {
+  .passwordForm {
+    position: relative;
+    display: block;
+    margin-top: 70px;
+    width: 80%;
+    margin-right: 10%;
+    margin-left: 10%;
+    background-color: #fff;
+  }
+
+  .phoneForm {
+    position: relative;
+    display: block;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    width: 80%;
+    margin-right: 10%;
+    margin-left: 10%;
+    background-color: #fff;
+  }
+}
+
+.profileContainer {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid black;
+  margin: 20px;
+}
+
+.profileHeader {
+  position: relative;
+  text-align: left;
+  padding-left: 40px;
+  font-family: Domine;
+  font-size: 140%;
+  background-color: #000;
+  color: #ffffff;
+}
+
+.profileContent {
+  border-top: 1px solid black;
+  padding-bottom: 40px;
+  background-color: #d3d6d852;
+}
+
+.profileNotificationContainer {
+  width: 100%;
+  margin-top: 20px;
+
+}
+
+.profileNotificationContent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 20px;
+  margin-left: 20px;
+  font-family: 'DOMINE';
+  font-size: 150%;
+  color: #000;
+  opacity: 0.75;
+  transition: step-end;
+  border-radius: 25px;
+}
+
+.red{
+  background-color: red;
+}
+
+.green{
+  background-color: green;
 }

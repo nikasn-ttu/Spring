@@ -14,6 +14,9 @@ import ItemPage from './routes/ItemPage';
 
 import ProductListPage from './routes/ProductListPage';
 import HomePage from './routes/HomePage';
+import { LoginForm } from './routes/LoginForm';
+import { RegisterForm } from './routes/RegisterForm';
+import ProfileForm from './routes/ProfileForm';
 
 const router = createBrowserRouter([
   {
@@ -26,12 +29,24 @@ const router = createBrowserRouter([
           element: <HomePage></HomePage>, 
         },
         {
+          path: "/login",
+          element: <LoginForm></LoginForm>,
+        },
+        {
+          path: "/register",
+          element: <RegisterForm></RegisterForm>,
+        },
+        {
           path: "/products/",
           element: <ProductListPage></ProductListPage>, 
         },
         {
           path: "/products/:id",
           element: <ItemPage></ItemPage>, 
+        },
+        {
+          path: "/profile/:id",
+          element: <ProfileForm></ProfileForm>
         }
           
       ]

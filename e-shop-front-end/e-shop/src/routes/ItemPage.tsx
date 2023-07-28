@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
 import ButtonTemplate from "../components/ButtonTemplate";
-import { IItemCard } from "../Domain/IItemCard";
+import { IItemCard } from "../domain/IItemCard";
 import image_not_found from '../images/test_cat_img.png';
 import image_not_found2 from '../images/image_not_found.png';
 import { AppContext } from "./Root";
@@ -80,27 +80,7 @@ const ItemPage = () => {
                         </span>
                     </button>
                 </div>
-                <div className="" data-testid="ProductSize-component" onClick={event => console.log(handleSizeSelectorClick(event))}>
-                    <button className="itemSizeSelectorButton" title="L">
-                        <span className="ProductSize_container__NRkWh">
-                            <span className="ProductSize_DisplayLabel__x9KC_ Typography_Typography__jHH_m ck-alias_Typography__u21R5 Typography_bodyLarge__UaC_i">L</span>
-                        </span>
-                    </button>
-                </div>
-                <div className="" data-testid="ProductSize-component" onClick={event => console.log(handleSizeSelectorClick(event))}>
-                    <button className="itemSizeSelectorButton" title="XL">
-                        <span className="ProductSize_container__NRkWh">
-                            <span className="ProductSize_DisplayLabel__x9KC_ Typography_Typography__jHH_m ck-alias_Typography__u21R5 Typography_bodyLarge__UaC_i">XL</span>
-                        </span>
-                    </button>
-                </div>
-                <div className="" data-testid="ProductSize-component" onClick={event => console.log(handleSizeSelectorClick(event))}>
-                    <button className="itemSizeSelectorButton" title="XXL">
-                        <span className="ProductSize_container__NRkWh">
-                            <span className="ProductSize_DisplayLabel__x9KC_ Typography_Typography__jHH_m ck-alias_Typography__u21R5 Typography_bodyLarge__UaC_i">XXL</span>
-                        </span>
-                    </button>
-                </div>
+                
             </div>
             <div className="addToCartButtonContainer">
                 <ButtonTemplate onClick={handleAddToCartClick} text="Add to cart" />
@@ -116,7 +96,8 @@ const ItemPage = () => {
         </div>) :
             (
                 <>
-                    <div className="item-view-container-img">
+                <div className="itemPageContainer">
+                <div className="item-view-container-img">
                         <div>
                             <img src={mainImage}
                                 onError={(e) => {
@@ -162,27 +143,7 @@ const ItemPage = () => {
                                     </span>
                                 </button>
                             </div>
-                            <div className="" data-testid="ProductSize-component" onClick={event => console.log(handleSizeSelectorClick(event))}>
-                                <button className="itemSizeSelectorButton" title="L">
-                                    <span className="ProductSize_container__NRkWh">
-                                        <span className="ProductSize_DisplayLabel__x9KC_ Typography_Typography__jHH_m ck-alias_Typography__u21R5 Typography_bodyLarge__UaC_i">L</span>
-                                    </span>
-                                </button>
-                            </div>
-                            <div className="" data-testid="ProductSize-component" onClick={event => console.log(handleSizeSelectorClick(event))}>
-                                <button className="itemSizeSelectorButton" title="XL">
-                                    <span className="ProductSize_container__NRkWh">
-                                        <span className="ProductSize_DisplayLabel__x9KC_ Typography_Typography__jHH_m ck-alias_Typography__u21R5 Typography_bodyLarge__UaC_i">XL</span>
-                                    </span>
-                                </button>
-                            </div>
-                            <div className="" data-testid="ProductSize-component" onClick={event => console.log(handleSizeSelectorClick(event))}>
-                                <button className="itemSizeSelectorButton" title="XXL">
-                                    <span className="ProductSize_container__NRkWh">
-                                        <span className="ProductSize_DisplayLabel__x9KC_ Typography_Typography__jHH_m ck-alias_Typography__u21R5 Typography_bodyLarge__UaC_i">XXL</span>
-                                    </span>
-                                </button>
-                            </div>
+                            
                         </div>
                         <div className="addToCartButtonContainer">
                             <ButtonTemplate onClick={handleAddToCartClick} text="Add to cart" />
@@ -196,6 +157,8 @@ const ItemPage = () => {
                             </div>
                         </div>
                     </div>
+                </div>
+                    
                 </>
             )
     );

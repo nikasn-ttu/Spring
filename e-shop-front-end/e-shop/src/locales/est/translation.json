@@ -13,5 +13,11 @@
     },
     "location": "Geben Sie den Standort ein",
     "Address": "Gib die Adresse ein",
-    "Buy" : "Osta"
+    "Buy" : "Osta",
+    "Enter old password" : "Sisesta vana parool",
+    "Enter new password" : "Sisesta uus parool",
+    "Enter new phone number" : "Sisesta uus telefoninumber",
+    "Current phone number" : "Praegune telefoninumber",
+    "Change password" : "Muuda parool",
+    "Change phone number" : "Muuda telefoninumber"
 }

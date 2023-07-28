@@ -1,5 +1,7 @@
 import image_not_found from '../images/test_cat_img.png';
 import test_image from '../images/category_images/category_underwear_mens.png';
+import profileIcon from '../images/loginForm/profileIcon.png'
+
 
 const HomePage = () => {
 
@@ -13,7 +15,7 @@ const HomePage = () => {
             </div>
             <div className="category-scroll-container">
             <div className="category-scroll-container-item">
-                <img src={test_image} alt="Image is not available" />
+                <img src={profileIcon} alt="Image is not available" />
                 <p>MEN'S UNDERWEAR</p>
             </div>
             
