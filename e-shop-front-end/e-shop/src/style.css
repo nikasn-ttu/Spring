@@ -31,6 +31,7 @@ body {
   background-color: #f7f7f7;
   overflow: scroll;
   background: transparent;
+  
 }
 
 .wrapper {
@@ -596,32 +597,55 @@ div.scroll-container img {
   padding: var(--accordion-padding-borderless);
 }
 
-.home-page-title h1 {
+.home-page-title{
+  width: min-content;
+}
+
+.home-page-title p, .home-page-title h1 {
   font-family: Domine;
+  font-size: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-left: 10px;
+}
+
+.home-page-title h1 {
   font-size: 4rem;
 }
 
+@media (max-width: 360px) {
+  .home-page-title h1 {
+    font-size: 3.5rem;
+  }
+}
+
 .home-page-content-container {
-  background-image: url("images/test_cat_img.png");
-
-  /* Full height */
-  height: 100%;
-
-  /* Center and scale the image nicely */
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  padding-top: 5rem;
+  background-image: url(https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/48bb0b8f-acf0-4aac-a60f-0fb75c93a906/d9h3mjw-02dc5645-9efd-4225-b5eb-105bcd3c6fe4.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzQ4YmIwYjhmLWFjZjAtNGFhYy1hNjBmLTBmYjc1YzkzYTkwNlwvZDloM21qdy0wMmRjNTY0NS05ZWZkLTQyMjUtYjVlYi0xMDViY2QzYzZmZTQuanBnIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0._JIslKkqAAcSApqN8uuoI5dQdkCQQTL0BI_nfnV-Lao);
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    /* background-size: contain; */
+    padding-top: 5rem;
 }
 
 .category-scroll-container {
-  width: 100%;
-  height: 100%;
-  overflow-x: scroll;
-  overflow-y: visible;
+  
+  overflow-y: scroll;
   display: flex;
-  flex-direction: row;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+
 }
+
+.category-scroll-container::-webkit-scrollbar {
+  display: none;
+}
+
+
+
+
+
 
 
 .category-scroll-container-item {
@@ -671,18 +695,22 @@ div.scroll-container img {
   padding-top: 20px;
   padding-bottom: 20px;
   background-color: #d3d6d852;
+  flex-direction: column;
 }
 
 .registerFormContainer {
   width: 100%;
-  height: 1200px;
+  min-height: fit-content;
   display: flex;
   justify-content: center;
   align-items: center;
   padding-top: 20px;
   padding-bottom: 20px;
   background-color: #d3d6d852;
+  flex-direction: column;
 }
+
+
 
 .loginAndRegisterForm {
   width: 500px;
@@ -695,6 +723,13 @@ div.scroll-container img {
   margin: 8px;
   background-color: white;
 }
+
+@media (max-width: 600px) {
+  .loginAndRegisterForm {
+    width: 90%;
+  }
+}
+
 
 .loginAndRegisterFormHeader {
   padding-top: 40px;
@@ -716,6 +751,7 @@ div.scroll-container img {
   justify-content: center;
   align-items: center;
   gap: 50px;
+  margin-bottom: 50px;
 }
 
 .loginFormBodyInput {
@@ -730,6 +766,22 @@ div.scroll-container img {
   flex-direction: column;
 }
 
+.loginFormErrorContainer{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 500px;
+  margin-right: 20px;
+  margin-left: 20px;
+  font-family: 'DOMINE';
+  font-size: 150%;
+  color: #000;
+  opacity: 0.75;
+  transition: step-end;
+  flex-direction: column;
+  background-color: red;
+}
+
 .inputContainer {
   width: 100%;
   height: 40px;
@@ -740,6 +792,8 @@ div.scroll-container img {
 .inputBorder {
   border: 1px solid black;
 }
+
+
 
 .loginFormIcon {
   width: 40px;
@@ -927,7 +981,7 @@ div.scroll-container img {
   color: #000;
   opacity: 0.75;
   transition: step-end;
-  border-radius: 25px;
+
 }
 
 .red{

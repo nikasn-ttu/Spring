@@ -1,4 +1,5 @@
 export interface JwtResponse{
     jwt: string,
-    refreshToken: string
+    refreshToken: string,
+    errorMessage: string
 }

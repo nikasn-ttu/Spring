@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom';
 import { ItemCard } from '../components/ItemCard';
+import { HelperMethods } from '../helpers/Helpers';
 
 interface IItemCard {
     id: string,
@@ -15,6 +16,7 @@ const ProductListPage = () => {
 
 
     const { t } = useTranslation();
+    let contentContainerWidth = document.getElementById("main")?.offsetWidth;
 
     const [card, setCard] = useState({
         id: '1',
@@ -26,21 +28,21 @@ const ProductListPage = () => {
 
     const element = document.getElementById('main');
     if (element !== null) {
-        document.documentElement.style.setProperty('--card-width', `${(element.offsetWidth - 10 * 6) / 3}px`); //change / * 3 to / * 2 for 2 cards per row
-        document.documentElement.style.setProperty('--main-width', `${element.offsetWidth}px`);
+        HelperMethods.setAmountOfProductInRow(element);
     }
 
     window.onresize = function () {
-        
+
         const element = document.getElementById('main');
         if (element !== null) {
-            document.documentElement.style.setProperty('--card-width', `${(element.offsetWidth - 10 * 6) / 3}px`);
-            document.documentElement.style.setProperty('--main-width', `${element.offsetWidth}px`);
+            
+            HelperMethods.setAmountOfProductInRow(element);
         }
     };
 
 
     return (
+        <>
         <div className='page-cards'>
             <ItemCard {...card} />
             <ItemCard {...card} />
@@ -53,6 +55,8 @@ const ProductListPage = () => {
             <ItemCard {...card} />
             <ItemCard {...card} />
         </div>
+        </>
+        
 
 
     )

@@ -4,7 +4,6 @@ import com.commerce.eshop.DTO.LoginDTO;
 import com.commerce.eshop.DTO.identity.RefreshTokenModel;
 import com.commerce.eshop.DTO.identity.RegisterDTO;
 import com.commerce.eshop.DTO.identity.JwtResponse;
-import com.commerce.eshop.models.user.ApplicationUser;
 import com.commerce.eshop.services.AuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -16,8 +15,13 @@ public class AuthenticationController {
     @Autowired
     private AuthenticationService authenticationService;
     @PostMapping("/register")
-    public ApplicationUser registerUser(@RequestBody RegisterDTO body){
-        return authenticationService.registerUser(body.getUsername(), body.getPassword(),body.getFirstName(), body.getLastName(), body.getPhoneNumber());
+    public JwtResponse registerUser(@RequestBody RegisterDTO body){
+        try {
+            authenticationService.registerUser(body.getUsername(), body.getPassword(),body.getFirstName(), body.getLastName(), body.getPhoneNumber());
+        }catch (RuntimeException e){
+            return new JwtResponse("", "", e.getMessage());
+        }
+        return authenticationService.loginUser(body.getUsername(), body.getPassword());
     };
 
     @PostMapping("/login")

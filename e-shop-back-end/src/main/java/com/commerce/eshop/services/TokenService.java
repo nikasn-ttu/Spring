@@ -105,7 +105,7 @@ public class TokenService {
         refreshTokenEntity.setPreviousExpirationTs(Instant.now().plusSeconds(302400));
         RefreshToken updatedRefreshToken = refreshTokenRepository.save(refreshTokenEntity);
 
-        return new JwtResponse(jwtEncoder.encode(JwtEncoderParameters.from(newClaims)).getTokenValue(), updatedRefreshToken.getRefreshToken());
+        return new JwtResponse(jwtEncoder.encode(JwtEncoderParameters.from(newClaims)).getTokenValue(), updatedRefreshToken.getRefreshToken(), "");
     }
 
 }

@@ -1,13 +1,13 @@
 import { use } from "i18next";
 import { useContext, useEffect, useState } from "react";
 import { useTranslation } from 'react-i18next'
-import { ProfileNotification } from "../domain/ProfileNotification";
 import { PasswordUpdateDTO } from "../dto/PasswordUpdateDTO";
 import { PhoneNumberUpdateDTO } from "../dto/PhoneNumberUpdateDTO";
 import lockIcon from '../images/loginForm/lock-closed-svgrepo-com.svg';
 import phoneIcon from '../images/loginForm/phone-svgrepo-com.svg'
 import { UserService } from "../services/UserService";
 import { AppContext } from "./Root";
+import { ProfileNotification } from "../domain/ProfileNotification";
 
 const ProfileForm = () => {
     const { username, userPhoneNumber, userFullname, setUserPhoneNumber } = useContext(AppContext);

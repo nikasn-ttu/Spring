@@ -61,7 +61,18 @@ const Navbar = () => {
         marginLeft: "-5%",
         marginTop: "10px",
         minWidth: "100%",
-      };
+    };
+
+    const handleLogOut = () => {
+        console.log('test')
+        if(setJwt && setUserFullname && setUserPhoneNumber && setUsername){
+            setJwt(null);
+            setUserFullname(null);
+            setUserPhoneNumber(null);
+            setUsername(null)
+        }
+        
+    }
       
 
 
@@ -112,8 +123,8 @@ const Navbar = () => {
                                     <span className='profileUsername'>{decodedJwt.sub}</span>
                                 </div>
                                 <div className="dropdown-content-profile">
-                                    <Link to={'/profile/123'}><span>Profile</span></Link>
-                                    <Link to={''}><span>Logout</span></Link>
+                                    <Link to={'/profile'}><span>Profile</span></Link>
+                                    <Link to={'/home'} onClick={handleLogOut}><span>Logout</span></Link>
                                 </div>
                             </div>
                         </div>}
@@ -163,8 +174,8 @@ const Navbar = () => {
                                 <span className='profileUsername'>{decodedJwt.sub}</span>
                             </div>
                             <div className="dropdown-content-profile">
-                                <Link to={'/profile/123'}><span>Profile</span></Link>
-                                <Link to={''}><span>Logout</span></Link>
+                                <Link to={'/profile'}><span>Profile</span></Link>
+                                <Link to={'/home'} onClick={handleLogOut}><span>Logout</span></Link>
                             </div>
                         </div>
                     </div>}

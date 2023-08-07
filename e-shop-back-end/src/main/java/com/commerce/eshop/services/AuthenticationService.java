@@ -39,6 +39,9 @@ public class AuthenticationService {
         String encodedPassword = passwordEncoder.encode(password);
         Role userRole = roleRepository.findByAuthority("USER").get();
         Set<Role> roles = new HashSet<>();
+        if(userRepository.findByUsername(username).isPresent()){
+            throw new RuntimeException("Email has been already registered");
+        }
         roles.add(userRole);
         return userRepository.save(new ApplicationUser(UUID.randomUUID(),username, encodedPassword,roles, firstName, lastName, phoneNumber));
 
@@ -63,7 +66,7 @@ public class AuthenticationService {
             refreshToken.setApplicationUser((ApplicationUser) auth.getPrincipal());
             RefreshToken savedRefreshToken = tokenService.saveRefreshToken(refreshToken);
             String token = tokenService.generateJwt(auth);
-            JwtResponse jwtResponse = new JwtResponse(token, savedRefreshToken.getRefreshToken());
+            JwtResponse jwtResponse = new JwtResponse(token, savedRefreshToken.getRefreshToken(), "");
             return jwtResponse;
         }catch (AuthenticationException e){
             return new JwtResponse();
