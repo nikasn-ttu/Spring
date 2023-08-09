@@ -1,7 +1,11 @@
 import image_not_found from '../images/test_cat_img.png';
 import test_image from '../images/category_images/category_underwear_mens.png';
-import profileIcon from '../images/loginForm/profileIcon.png'
-import { useEffect } from 'react';
+import testLogo from '../images/category_images/logo3.png'
+import { useEffect, useState } from 'react';
+import { CategoryService } from '../services/CategoryService';
+import { CategoryDTO } from '../domain/CategoryDTO';
+import { HomePageScrolItem } from '../components/HomePageScrolItem';
+import { useNavigate } from 'react-router-dom';
 
 
 const HomePage = () => {
@@ -10,6 +14,9 @@ const HomePage = () => {
         event.preventDefault(); // Prevent default scroll behavior to avoid double scrolling
         event.currentTarget.scrollLeft += event.deltaY
     }
+    const categoryService = new CategoryService();
+    const [categoryList, setCategoryList] = useState([] as CategoryDTO[])
+    const navigate = useNavigate();
 
     useEffect(() => {
         const container = document.getElementById('scrollMenu');
@@ -22,7 +29,21 @@ const HomePage = () => {
           container.removeEventListener('wheel', handleScroll);
         };
       }, []);
+
+    useEffect(() => {
+       const getCategories = async () => {
+            const list = await categoryService.getAllCategories();
+            if(list != undefined){
+                setCategoryList(list);
+            }
+       } 
+       getCategories();
+    },[])
     
+    const handleCategoryClick = (event : any) => {
+        console.log(event);
+        navigate(`/products/${event}`);
+    }
 
     return (
         <>
@@ -33,18 +54,7 @@ const HomePage = () => {
                     <h1>Collections</h1>
                 </div>
                 <div className="category-scroll-container" id='scrollMenu'>
-                    <div className="category-scroll-container-item">
-                        <img src={profileIcon} alt="Image is not available" />
-                        <p>MEN'S UNDERWEAR</p>
-                    </div>
-                    <div className="category-scroll-container-item">
-                        <img src={profileIcon} alt="Image is not available" />
-                        <p>MEN'S UNDERWEAR</p>
-                    </div>
-                    <div className="category-scroll-container-item">
-                        <img src={profileIcon} alt="Image is not available" />
-                        <p>MEN'S UNDERWEAR</p>
-                    </div>
+                    {categoryList.map(category => (<HomePageScrolItem category={category} handleClick={handleCategoryClick}/>))}
                 </div>
             </div>
 

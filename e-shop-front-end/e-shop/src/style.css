@@ -621,7 +621,7 @@ div.scroll-container img {
 }
 
 .home-page-content-container {
-  background-image: url(https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/48bb0b8f-acf0-4aac-a60f-0fb75c93a906/d9h3mjw-02dc5645-9efd-4225-b5eb-105bcd3c6fe4.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzQ4YmIwYjhmLWFjZjAtNGFhYy1hNjBmLTBmYjc1YzkzYTkwNlwvZDloM21qdy0wMmRjNTY0NS05ZWZkLTQyMjUtYjVlYi0xMDViY2QzYzZmZTQuanBnIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0._JIslKkqAAcSApqN8uuoI5dQdkCQQTL0BI_nfnV-Lao);
+    background-image: url(images/homePage/background_double2.png);
     height: 100%;
     background-position: center;
     background-repeat: no-repeat;
@@ -655,7 +655,7 @@ div.scroll-container img {
   justify-content: center;
   min-width: var(--category-scroll-container-item-width);
   height: var(--category-scroll-container-item-height);
-  background-color: rgb(237, 227, 227);
+  background-color: rgba(244, 237, 237, 0.513);
   margin: 2rem;
   transition: transform 0.3s;
   transition: all .2s ease-in-out;
@@ -663,6 +663,7 @@ div.scroll-container img {
 
 .category-scroll-container-item:hover {
   transform: scale(1.2);
+  background-color: rgba(244, 237, 237, 0.685);
 }
 
 .category-scroll-container-item img {

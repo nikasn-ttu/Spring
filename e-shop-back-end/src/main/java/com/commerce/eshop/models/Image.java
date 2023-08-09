@@ -22,4 +22,9 @@ public class Image {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "product_id", nullable = false)
     private Product product;
+
+    public Image(String image, Product product) {
+        this.image = image;
+        this.product = product;
+    }
 }

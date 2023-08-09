@@ -21,6 +21,7 @@ public class Product {
     private UUID id;
     @Column(name = "name", nullable = false)
     private String name;
+
     @Column(name = "description")
     private String description;
 
@@ -33,6 +34,13 @@ public class Product {
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "product")
     private List<ProductSize> productSizes;
+
+
+    public Product(String name, String description, Category category) {
+        this.name = name;
+        this.description = description;
+        this.category = category;
+    }
 
 
 

@@ -97,13 +97,15 @@ public class SecurityConfig {
 
         http.csrf(csrf -> {
             csrf.disable();
-            csrf.ignoringRequestMatchers("/h2-console/**");
+            //csrf.ignoringRequestMatchers("/h2-console/**");
         });
         http.cors(cors -> cors.configurationSource(corsConfigurationSource()));
         http.authorizeHttpRequests(requests -> {
             requests.requestMatchers("/api/auth/**").permitAll();
             requests.requestMatchers("/api/profile/**").permitAll();
             requests.requestMatchers("/h2-console/**").permitAll();
+            requests.requestMatchers("/api/products/**").permitAll();
+            requests.requestMatchers("/api/category/").permitAll();
             requests.requestMatchers("/admin/**").hasRole("ADMIN");
             requests.requestMatchers("/user/").hasAnyRole("ADMIN", "USER");
             requests.anyRequest().authenticated();

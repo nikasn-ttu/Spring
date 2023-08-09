@@ -16,13 +16,11 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/profile")
 public class UserController {
 
-    @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
-    private RoleRepository roleRepository;
-    @Autowired
     private UserService userService;
+
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
     @GetMapping("/")
     public String getLayer(){
         return "User layer access!";
@@ -38,8 +36,8 @@ public class UserController {
         return userService.updateUserPhone(updatePhoneNumberDTO.getUsername(), updatePhoneNumberDTO.getNewPhoneNumber());
     }
 
-    @GetMapping("/roles")
+    /*@GetMapping("/roles")
     public Role getRole(){
         return roleRepository.findByAuthority("ADMIN").get();
-    }
+    }*/
 }

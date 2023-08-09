@@ -27,17 +27,24 @@ import static com.commerce.eshop.specifications.TokenSpecification.*;
 @Service
 public class TokenService {
 
-    @Autowired
+
     private JwtEncoder jwtEncoder;
 
-    @Autowired
+
     private JwtDecoder jwtDecoder;
 
-    @Autowired
+
     private RefreshTokenRepository refreshTokenRepository;
 
-    @Autowired
+
     private UserService userService;
+
+    public TokenService(JwtEncoder jwtEncoder, JwtDecoder jwtDecoder, RefreshTokenRepository refreshTokenRepository, UserService userService) {
+        this.jwtEncoder = jwtEncoder;
+        this.jwtDecoder = jwtDecoder;
+        this.refreshTokenRepository = refreshTokenRepository;
+        this.userService = userService;
+    }
 
     public String generateJwt(Authentication auth){
 

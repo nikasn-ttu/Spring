@@ -22,4 +22,7 @@ public class Size {
     @OneToMany(mappedBy = "size")
     private List<ProductSize> productSizes;
 
+    public Size(String name) {
+        this.name = name;
+    }
 }

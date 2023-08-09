@@ -37,11 +37,11 @@ const router = createBrowserRouter([
           element: <RegisterForm></RegisterForm>,
         },
         {
-          path: "/products/",
+          path: "/products/:id",
           element: <ProductListPage></ProductListPage>, 
         },
         {
-          path: "/products/:id",
+          path: "/product/:id",
           element: <ItemPage></ItemPage>, 
         },
         {

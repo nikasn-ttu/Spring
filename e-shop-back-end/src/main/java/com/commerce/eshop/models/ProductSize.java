@@ -24,4 +24,7 @@ public class ProductSize {
     @MapsId("sizeId")
     @JoinColumn(name = "size_id")
     private Size size;
+
+    private Integer quantity;
+    private BigDecimal price;
 }

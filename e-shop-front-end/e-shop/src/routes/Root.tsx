@@ -52,7 +52,7 @@ const Root = () => {
             setCartList(JSON.parse(localStorage.getItem("cartList") as string) as ICartItem[]);
         }
         console.log(localStorage.getItem("lang"));
-        naigate(`/products/?lang=${localStorage.getItem("lang") === null ? "en" : localStorage.getItem("lang")}`);
+        naigate(`/home/?lang=${localStorage.getItem("lang") === null ? "en" : localStorage.getItem("lang")}`);
     }, []);
 
     return (

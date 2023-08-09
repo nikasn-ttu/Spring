@@ -20,10 +20,15 @@ import java.util.UUID;
 @Transactional
 public class UserService implements UserDetailsService {
 
-    @Autowired
+
     private PasswordEncoder encoder;
-    @Autowired
+
     private UserRepository userRepository;
+
+    public UserService(PasswordEncoder encoder, UserRepository userRepository) {
+        this.encoder = encoder;
+        this.userRepository = userRepository;
+    }
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
