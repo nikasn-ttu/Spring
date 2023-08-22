@@ -1,14 +1,13 @@
-import { ICategory } from "../domain/ICategory";
+import { IProduct } from "../domain/IProduct";
 import { BaseService } from "./BaseService";
 
-export class CategoryService extends BaseService {
+export class ProductService extends BaseService {
     constructor() {
-        super("/category");
+        super("/products");
     }
-
-    async getAllCategories(): Promise<ICategory[] | undefined> {
+    async getAllProductsBelongsToCategory(data : string): Promise<IProduct[] | undefined>{
         try {
-            const response = await this.axios.get<ICategory[]>('/');
+            const response = await this.axios.get<IProduct[]>('/' + data);
 
             console.log('response', response);
             if (response.status === 200) {
@@ -20,5 +19,4 @@ export class CategoryService extends BaseService {
             return undefined;
         }
     }
-
 }

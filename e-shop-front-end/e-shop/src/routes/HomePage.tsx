@@ -3,7 +3,7 @@ import test_image from '../images/category_images/category_underwear_mens.png';
 import testLogo from '../images/category_images/logo3.png'
 import { useEffect, useState } from 'react';
 import { CategoryService } from '../services/CategoryService';
-import { CategoryDTO } from '../domain/CategoryDTO';
+import { ICategory } from '../domain/ICategory';
 import { HomePageScrolItem } from '../components/HomePageScrolItem';
 import { useNavigate } from 'react-router-dom';
 
@@ -15,7 +15,7 @@ const HomePage = () => {
         event.currentTarget.scrollLeft += event.deltaY
     }
     const categoryService = new CategoryService();
-    const [categoryList, setCategoryList] = useState([] as CategoryDTO[])
+    const [categoryList, setCategoryList] = useState([] as ICategory[])
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -41,7 +41,6 @@ const HomePage = () => {
     },[])
     
     const handleCategoryClick = (event : any) => {
-        console.log(event);
         navigate(`/products/${event}`);
     }
 

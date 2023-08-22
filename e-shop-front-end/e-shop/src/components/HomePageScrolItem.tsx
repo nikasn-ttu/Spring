@@ -1,7 +1,7 @@
-import { CategoryDTO } from "../domain/CategoryDTO";
+import {ICategory } from "../domain/ICategory";
 
 interface Props  {
-    category : CategoryDTO
+    category : ICategory
     handleClick : (event: any) => void
 }
 

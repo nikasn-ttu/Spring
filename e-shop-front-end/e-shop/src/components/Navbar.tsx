@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next'
-import React, { useContext, useEffect, useRef, useState } from 'react'
+import React, { ChangeEvent, useContext, useEffect, useRef, useState } from 'react'
 import LanguageSelector from './LanguageSelector';
 import { Link } from 'react-router-dom';
 import { AppContext } from '../routes/Root';
@@ -7,13 +7,16 @@ import { debugPort } from 'process';
 import profileIcon from '../images/loginForm/profileIcon.png'
 import jwt_decode from "jwt-decode";
 import useOutsideClick from './useOutsideClick';
+import cartIcon from '../images/cartIcon.png'
+import { CartIcon } from './CartIcon';
+import { ICartItem } from '../domain/ICartItem';
 
 const Navbar = () => {
-    const { jwt, setJwt, username, setUsername, setUserPhoneNumber, setUserFullname } = useContext(AppContext);
+    const { jwt, setJwt, username, setUsername, setUserPhoneNumber, setUserFullname, cartList, setShowCart } = useContext(AppContext);
     const { t } = useTranslation();
     const { isScreenSmall, setIsScreenSmall } = useContext(AppContext);
     const [decodedJwt, setDecodedJwt] = useState() as any;
-
+    const [listOfProducts, setListOfProducts] = useState([] as ICartItem[])
     useEffect(() => {
         if (jwt != null) {
             let decodedJwt = jwt_decode(jwt.jwt) as any
@@ -26,6 +29,10 @@ const Navbar = () => {
             }
         }
     }, [jwt])
+
+    useEffect(() => {
+        setListOfProducts(cartList);
+    },[cartList])
 
     useEffect(() => {
         const mediaQuery = window.matchMedia('(max-width: 992px)');
@@ -82,7 +89,15 @@ const Navbar = () => {
             <div className="container-fluid" ref={ref}>
                 <Link className="navbar-brand" to={`./products/?lang=${localStorage.getItem("lang")}`}>Navbar</Link>
                 
-                {isScreenSmall && (<div className="navbar-language"><LanguageSelector /></div>)}
+                {isScreenSmall && (
+                    <>
+                        <div className="navbar-language"><LanguageSelector /></div>
+                        <div className='navbar-cart'>
+                            <CartIcon cartIcon={cartIcon} cartList={listOfProducts} setShowCart={setShowCart}/>
+                        </div>
+                        
+                    </>
+                )}
                 <button className="navbar-toggler togglerCustom" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon togglerCustom"></span>
                 </button>
@@ -162,6 +177,7 @@ const Navbar = () => {
                         </div>
                     </div>
                     {jwt === null && <div className='loginAndRegisterMobile'>
+                        <CartIcon cartIcon={cartIcon} cartList={listOfProducts} setShowCart={setShowCart}/>
                         <div className="navbar-language"><LanguageSelector /></div>
                         <Link to={"/login"}><button className='loginButton'>Sign In</button></Link>
                         <Link to={"/register"}><button className='registerButton'>Sign Up</button></Link>

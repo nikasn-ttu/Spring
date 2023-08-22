@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom/client';
 import './style.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
-import "/node_modules/flag-icons/css/flag-icons.min.css";
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
@@ -17,6 +16,7 @@ import HomePage from './routes/HomePage';
 import { LoginForm } from './routes/LoginForm';
 import { RegisterForm } from './routes/RegisterForm';
 import ProfileForm from './routes/ProfileForm';
+import CheckOut from './routes/CheckOut';
 
 const router = createBrowserRouter([
   {
@@ -47,6 +47,10 @@ const router = createBrowserRouter([
         {
           path: "/profile/:id",
           element: <ProfileForm></ProfileForm>
+        },
+        {
+          path: "/checkout",
+          element : <CheckOut></CheckOut>
         }
           
       ]

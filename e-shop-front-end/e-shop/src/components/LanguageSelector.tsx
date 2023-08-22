@@ -1,10 +1,6 @@
 import { ChangeEvent, useEffect, useState } from "react";
 import i18n from "../i18n";
-import { US } from 'country-flag-icons/string/3x2'
-import SVG from 'react-svg';
-import ReactSelect from "react-select";
 import { Link, useLocation, useParams } from "react-router-dom";
-
 import EE from "../images/languages/EE.svg";
 import GB from "../images/languages/GB.svg";
 import RU from "../images/languages/RU.svg";

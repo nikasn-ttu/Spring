@@ -41,10 +41,10 @@ public class EShopApplication {
 			 userRepository.save(admin);
 
 			 //Add categories
-			 Category test1 = categoryRepository.save(new Category("Test_1", "https://drive.google.com/uc?id=144UE5PWSQ7HOph0nwbvzD0Ma2Ax6iuP-"));
-			 categoryRepository.save(new Category("Test_2", "https://drive.google.com/uc?id=144UE5PWSQ7HOph0nwbvzD0Ma2Ax6iuP-"));
-			 categoryRepository.save(new Category("Test_3", "https://drive.google.com/uc?id=144UE5PWSQ7HOph0nwbvzD0Ma2Ax6iuP-"));
-			 categoryRepository.save(new Category("Test_4", "https://drive.google.com/uc?id=144UE5PWSQ7HOph0nwbvzD0Ma2Ax6iuP-"));
+			 Category test1 = categoryRepository.save(new Category("Test_1", "https://drive.google.com/uc?id=1xh0RamwTtUHKddxnTaxVQXxLl-XINpMw"));
+			 categoryRepository.save(new Category("Test_2", "https://drive.google.com/uc?id=1xh0RamwTtUHKddxnTaxVQXxLl-XINpMw"));
+			 categoryRepository.save(new Category("Test_3", "https://drive.google.com/uc?id=1xh0RamwTtUHKddxnTaxVQXxLl-XINpMw"));
+			 categoryRepository.save(new Category("Test_4", "https://drive.google.com/uc?id=1xh0RamwTtUHKddxnTaxVQXxLl-XINpMw"));
 			 System.out.println(test1.getId());
 
 
@@ -55,15 +55,24 @@ public class EShopApplication {
 
 			 //Add image for product
 
-			 imageService.saveImage(new Image("https://drive.google.com/uc?id=144UE5PWSQ7HOph0nwbvzD0Ma2Ax6iuP-", productTest1));
+			 imageService.saveImage(new Image("https://drive.google.com/uc?id=1xh0RamwTtUHKddxnTaxVQXxLl-XINpMw", productTest1));
+			 imageService.saveImage(new Image("https://drive.google.com/uc?id=15PMAIJjeGhw56pc61TRWoRJfgk4HmN4L", productTest1));
+			 imageService.saveImage(new Image("https://drive.google.com/uc?id=15PMAIJjeGhw56pc61TRWoRJfgk4HmN4L", productTest1));
+			 imageService.saveImage(new Image("https://drive.google.com/uc?id=15PMAIJjeGhw56pc61TRWoRJfgk4HmN4L", productTest1));
 
 			 //Add sizes
 
 			 Size sizeTest1 = sizeService.saveSize(new Size("S"));
+			 Size sizeTest2 = sizeService.saveSize(new Size("M"));
+			 Size sizeTest3 = sizeService.saveSize(new Size("L"));
 
 			 //Add product sizes
 			 ProductSizeId productSizeId = new ProductSizeId(productTest1.getId(), sizeTest1.getId());
-			 productSizeService.saveProductSize(new ProductSize(productSizeId, productTest1, sizeTest1, 10 ,new BigDecimal(10.00)));
+			 ProductSizeId productSizeId2 = new ProductSizeId(productTest1.getId(), sizeTest2.getId());
+			 ProductSizeId productSizeId3 = new ProductSizeId(productTest1.getId(), sizeTest3.getId());
+			 productSizeService.saveProductSize(new ProductSize(productSizeId, productTest1, sizeTest1, 0 ,new BigDecimal(10.00)));
+			 productSizeService.saveProductSize(new ProductSize(productSizeId2, productTest1, sizeTest2, 10 ,new BigDecimal(20.00)));
+			 productSizeService.saveProductSize(new ProductSize(productSizeId3, productTest1, sizeTest3, 10 ,new BigDecimal(30.00)));
 
 		 };
 	}
