@@ -109,6 +109,8 @@ const Root = () => {
 
     const handleCartButtonClick = () => {
         navigate("/checkout")
+        setShowCart(false);
+        
     }
 
     return (

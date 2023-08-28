@@ -7,20 +7,27 @@ import com.commerce.eshop.repository.RefreshTokenRepository;
 import com.commerce.eshop.repository.UserRepository;
 import com.fasterxml.jackson.databind.JsonSerializable;
 import com.fasterxml.jackson.databind.util.JSONPObject;
+import com.nimbusds.jose.*;
+import com.nimbusds.jose.crypto.DirectEncrypter;
+import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.io.Decoders;
+import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.oauth2.jwt.JwtClaimsSet;
-import org.springframework.security.oauth2.jwt.JwtDecoder;
-import org.springframework.security.oauth2.jwt.JwtEncoder;
-import org.springframework.security.oauth2.jwt.JwtEncoderParameters;
+import org.springframework.security.oauth2.jwt.*;
 import org.springframework.stereotype.Service;
 
+import javax.crypto.spec.SecretKeySpec;
+import java.security.Key;
 import java.time.Instant;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import java.util.stream.Collectors;
+import io.jsonwebtoken.Jwts;
 
 import static com.commerce.eshop.specifications.TokenSpecification.*;
 
@@ -39,6 +46,11 @@ public class TokenService {
 
     private UserService userService;
 
+    @Value("${jwt.secret}")
+    private String jwtSecret;
+
+
+
     public TokenService(JwtEncoder jwtEncoder, JwtDecoder jwtDecoder, RefreshTokenRepository refreshTokenRepository, UserService userService) {
         this.jwtEncoder = jwtEncoder;
         this.jwtDecoder = jwtDecoder;
@@ -54,17 +66,30 @@ public class TokenService {
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.joining(" "));
 
+        Instant currentTime = Instant.now();
+        long currentTimeMillis = currentTime.toEpochMilli();
+        Instant plusTwoMinutes = currentTime.plusSeconds(120);
+        long plusTwoMinutesMillis = plusTwoMinutes.toEpochMilli();
+
         JwtClaimsSet claims = JwtClaimsSet.builder()
                 .issuer("e-shop")
-                .issuedAt(now)
-                .expiresAt(now.plusSeconds(120))
                 .subject(auth.getName())
                 .claim("roles", scope)
                 .claim("phone", ((ApplicationUser) auth.getPrincipal()).getPhoneNumber())
                 .claim("fullName", ((ApplicationUser) auth.getPrincipal()).getFirstName() + " " + ((ApplicationUser) auth.getPrincipal()).getLastName())
                 .build();
 
-        return jwtEncoder.encode(JwtEncoderParameters.from(claims)).getTokenValue();
+        Key key = Keys.hmacShaKeyFor(jwtSecret.getBytes());
+
+        String token = Jwts.builder()
+                .setHeaderParam("typ", "JWT")
+                .setClaims(claims.getClaims())
+                .setIssuedAt(new Date(currentTimeMillis))
+                .setExpiration(new Date(plusTwoMinutesMillis))
+                .signWith(key, SignatureAlgorithm.HS256)
+                .compact();
+
+        return token;
     }
 
     public List<RefreshToken> getUserListOfRefreshTokens(ApplicationUser principal){
