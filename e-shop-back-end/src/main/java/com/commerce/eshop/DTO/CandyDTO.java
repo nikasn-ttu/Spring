@@ -8,9 +8,12 @@ import java.util.UUID;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class SizeDTO {
+public class CandyDTO {
     private UUID id;
+
     private String name;
 
-    private Integer candyLimit;
+    private String image;
+
+    private Integer quantity;
 }

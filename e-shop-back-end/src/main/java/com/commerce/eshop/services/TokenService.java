@@ -9,6 +9,7 @@ import com.fasterxml.jackson.databind.JsonSerializable;
 import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.nimbusds.jose.*;
 import com.nimbusds.jose.crypto.DirectEncrypter;
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
@@ -68,7 +69,7 @@ public class TokenService {
 
         Instant currentTime = Instant.now();
         long currentTimeMillis = currentTime.toEpochMilli();
-        Instant plusTwoMinutes = currentTime.plusSeconds(120);
+        Instant plusTwoMinutes = currentTime.plusSeconds(1000);
         long plusTwoMinutesMillis = plusTwoMinutes.toEpochMilli();
 
         JwtClaimsSet claims = JwtClaimsSet.builder()
@@ -92,6 +93,21 @@ public class TokenService {
         return token;
     }
 
+    public Claims verifyToken(String token) {
+        try {
+            Key key = Keys.hmacShaKeyFor(jwtSecret.getBytes());
+
+            return Jwts.parserBuilder()
+                    .setSigningKey(key)
+                    .build()
+                    .parseClaimsJws(token)
+                    .getBody();
+        } catch (JwtException e) {
+            // Handle verification failure
+            return null;
+        }
+    }
+
     public List<RefreshToken> getUserListOfRefreshTokens(ApplicationUser principal){
         UUID applicationUserId = principal.getId();
         List<RefreshToken> refreshTokensBelongsToCurrentUser = refreshTokenRepository.findAll(refreshTokenBelongsToUser(applicationUserId));
@@ -107,7 +123,11 @@ public class TokenService {
     }
 
     public JwtResponse updateJwtTokenByRefreshToken(String jwt, String refreshToken){
-        Map<String, Object> claims = jwtDecoder.decode(jwt).getClaims();
+        Claims claims = verifyToken(jwt);
+        if(claims == null){
+            throw new RuntimeException("JWT token is not valid");
+        }
+        //Map<String, Object> claims = jwtDecoder.decode(jwt).getClaims();
         ApplicationUser applicationUser = userService.findUserByUsername(claims.get("sub").toString());
         List<RefreshToken> refreshTokens = refreshTokenRepository
                 .findAll(refreshTokenBelongsToUser(applicationUser.getId())
@@ -138,6 +158,22 @@ public class TokenService {
         RefreshToken updatedRefreshToken = refreshTokenRepository.save(refreshTokenEntity);
 
         return new JwtResponse(jwtEncoder.encode(JwtEncoderParameters.from(newClaims)).getTokenValue(), updatedRefreshToken.getRefreshToken(), "");
+    }
+
+    public String extractUsernameFromToken(String jwtToken){
+        Claims claims = verifyToken(jwtToken);
+        return claims.get("sub").toString();
+    }
+
+    public Boolean validateToken(String token) {
+        Claims claims = verifyToken(token);
+        long issued = Long.parseLong(claims.get("iat").toString());
+        long expired = Long.parseLong(claims.get("exp").toString());
+        long currentTime = Instant.now().getEpochSecond();
+        if (currentTime > expired || currentTime < issued) {
+            return false;
+        }
+        return true;
     }
 
 }
